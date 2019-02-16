@@ -1,15 +1,16 @@
 {
-    "name": "jankx/twig-engine",
-    "description": "The flexible, fast, and secure template engine for Jankx theme framemwork",
-    "type": "library",
-    "require": {
-        "jankx/core": "dev-master"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Puleeno Nguyen",
-            "email": "puleeno@gmail.com"
-        }
-    ]
+  "name": "jankx/twig-engine",
+  "description": "The flexible, fast, and secure template engine for Jankx theme framemwork",
+  "type": "library",
+  "require": {
+    "jankx/core": "dev-master"
+  },
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Puleeno Nguyen",
+      "email": "puleeno@gmail.com"
+    }
+  ]
 }
