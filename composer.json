@@ -3,7 +3,7 @@
   "description": "The flexible, fast, and secure template engine for Jankx theme framemwork",
   "type": "library",
   "require": {
-    "jankx/core": "dev-dev"
+    "jankx/core": "dev-master"
   },
   "license": "MIT",
   "minimum-stability": "dev",
