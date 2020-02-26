@@ -1,2 +1,2 @@
 # twig-template
-The flexible, fast, and secure template engine for Foxy theme framemwork
+The flexible, fast, and secure template engine for Jankx Framework
