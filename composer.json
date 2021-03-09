@@ -16,7 +16,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Jankx\\Twig": "src/"
+      "Jankx\\Twig\\": "src/"
     },
     "files": [
       "./bootstrap.php"
