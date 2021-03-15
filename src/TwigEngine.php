@@ -24,7 +24,8 @@ class TwigEngine extends Engine
         $this->twig = new Environment($loader, array('cache' => $this->getTemplateCaches()));
     }
 
-    public static function isDebug() {
+    public static function isDebug()
+    {
         return defined('JANKX_TWIG_ENGINE_DEBUG') && JANKX_TWIG_ENGINE_DEBUG;
     }
 
@@ -83,7 +84,7 @@ class TwigEngine extends Engine
 
                 echo $template->render($data);
                 break;
-            } catch(\Twig\Error\LoaderError $e) {
+            } catch (\Twig\Error\LoaderError $e) {
                 if (static::isDebug()) {
                     error_log($e->getMessage());
                 }
