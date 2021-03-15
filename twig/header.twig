@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html class="{% if html_class is defined%}{{ html_class | join(' ') }}{% else %}no-js{% endif %}">
+    <head>
+        <meta charset="{{ bloginfo('charset') }}">
+        <link rel="profile" href="https://gmpg.org/xfn/11">
+        <title>{{ wp_title() }}</title>
+        {{ wp_head() }}
+    </head>
+    <body {{ body_class() }}>
+        {{ wp_body_open() }}
+
+        {{ do_action('jankx_template_before_header')}}
+            {{ jankx_component('header') }}
+        {{ do_action('jankx_template_after_header') }}
