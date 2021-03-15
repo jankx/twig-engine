@@ -18,7 +18,11 @@ class TemplateFunctions {
             'wp_footer',
             'wp_body_open',
             'body_class',
+            'is_active_sidebar',
+            'dynamic_sidebar',
             'jankx_template',
+            'jankx_open_container',
+            'jankx_close_container'
         );
     }
 
@@ -27,9 +31,9 @@ class TemplateFunctions {
         $userDefineFuncs   = apply_filters(
             'jankx_twig_engine_functions',
             array(
-                'jankx_component',
                 'do_action',
-                'jankx_template_has_footer'
+                'jankx_template_has_footer',
+                'jankx_component'
             )
         );
 
