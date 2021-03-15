@@ -4,6 +4,7 @@ namespace Jankx\Twig;
 use Jankx\Template\Engine\Engine;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+use Twig\TwigFunction;
 use Twig\Error\LoaderError;
 
 class TwigEngine extends Engine
@@ -27,6 +28,17 @@ class TwigEngine extends Engine
     public static function isDebug()
     {
         return defined('JANKX_TWIG_ENGINE_DEBUG') && JANKX_TWIG_ENGINE_DEBUG;
+    }
+
+    public function setupEnvironment() {
+        $functions = new TemplateFunctions();
+        foreach($functions->getAvailableFunctions() as $functionName => $function) {
+            if (gettype($functionName) === 'integer') {
+                $functionName = $function;
+            }
+            $this->twig->addFunction(new TwigFunction($functionName, $function));
+        }
+        do_action('jankx_setup_twig_environment', $this->twig, $this);
     }
 
     protected function getTemplateCaches()
