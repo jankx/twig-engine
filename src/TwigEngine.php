@@ -19,19 +19,29 @@ class TwigEngine extends Engine
     {
         parent::__construct($id, $template_directory, $template_location, $args);
 
-        $cacheDir = sprintf('%s/caches/twig', constant('WP_CONTENT_DIR'));
+        $cacheDir   = sprintf('%s/caches/twig', constant('WP_CONTENT_DIR'));
+        $loader     = new FilesystemLoader(array_reverse($this->directories));
+        $this->twig = new Environment($loader, array('cache' => $this->getTemplateCaches()));
+    }
 
-        $loader = new FilesystemLoader($this->directories);
-        $this->twig = new Environment($loader, [
-            'cache' => apply_filters(
-                'jankx_twig_engine_cache_directory',
-                $cacheDir,
-                $id,
-                $template_directory,
-                $template_location,
-                $args
-            ),
-        ]);
+    public static function isDebug() {
+        return defined('JANKX_TWIG_ENGINE_DEBUG') && JANKX_TWIG_ENGINE_DEBUG;
+    }
+
+    protected function getTemplateCaches()
+    {
+        if (static::isDebug()) {
+            return false;
+        }
+
+        return apply_filters(
+            'jankx_twig_engine_cache_directory',
+            $cacheDir,
+            $id,
+            $template_directory,
+            $template_location,
+            $args
+        );
     }
 
     public function setDefaultTemplateDir($dir)
@@ -65,12 +75,19 @@ class TwigEngine extends Engine
     public function render($templates, $data = [], $echo = true)
     {
         foreach ((array)$templates as $template) {
-            $template = $this->twig->load(sprintf('%s.%s', $template, $this->extension));
+            try {
+                $template = $this->twig->load(sprintf('%s.%s', $template, $this->extension));
+                if (!$echo) {
+                    return $template->render($data);
+                }
 
-            if (!$echo) {
-                return $template->render($data);
+                echo $template->render($data);
+                break;
+            } catch(\Twig\Error\LoaderError $e) {
+                if (static::isDebug()) {
+                    error_log($e->getMessage());
+                }
             }
-            echo $template->render($data);
         }
     }
 }
