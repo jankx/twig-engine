@@ -6,7 +6,8 @@ use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 
-class TwigEngine extends Engine {
+class TwigEngine extends Engine
+{
     const ENGINE_NAME = 'twig';
 
     protected $twig;
@@ -18,18 +19,23 @@ class TwigEngine extends Engine {
     {
         parent::__construct($id, $template_directory, $template_location, $args);
 
-        $cacheDir = sprintf('%s/jankx/caches', constant('WP_CONTENT_DIR'));
+        $cacheDir = sprintf('%s/caches/twig', constant('WP_CONTENT_DIR'));
 
         $loader = new FilesystemLoader($this->directories);
         $this->twig = new Environment($loader, [
             'cache' => apply_filters(
                 'jankx_twig_engine_cache_directory',
-                $cacheDir, $id, $template_directory, $template_location, $args
+                $cacheDir,
+                $id,
+                $template_directory,
+                $template_location,
+                $args
             ),
         ]);
     }
 
-    public function setDefaultTemplateDir($dir) {
+    public function setDefaultTemplateDir($dir)
+    {
         if (preg_match('/jankx\/template\/default$/', $dir)) {
             array_push($this->directories, sprintf('%s/twig', dirname(__DIR__)));
         } else {
@@ -37,7 +43,8 @@ class TwigEngine extends Engine {
         }
     }
 
-    public function setDirectoryInTheme($dirName) {
+    public function setDirectoryInTheme($dirName)
+    {
         $templateDirectory = sprintf('%s/%s', get_template_directory(), $dirName);
         if (file_exists($templateDirectory)) {
             array_push($this->directories, $templateDirectory);
@@ -51,12 +58,13 @@ class TwigEngine extends Engine {
         }
     }
 
-    public function searchTemplate($templates) {
+    public function searchTemplate($templates)
+    {
     }
 
     public function render($templates, $data = [], $echo = true)
     {
-        foreach((array)$templates as $template) {
+        foreach ((array)$templates as $template) {
             $template = $this->twig->load(sprintf('%s.%s', $template, $this->extension));
 
             if (!$echo) {
