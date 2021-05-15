@@ -6,11 +6,13 @@ namespace Jankx\Twig;
  *
  * Define all TwigFunction can call in .twig template file
  */
-class TemplateFunctions {
+class TemplateFunctions
+{
     protected $built_in_funcs = array(
     );
 
-    protected function getTemplateFunctions() {
+    protected function getTemplateFunctions()
+    {
         return array(
             'bloginfo' => 'get_bloginfo',
             'wp_title',
@@ -26,7 +28,8 @@ class TemplateFunctions {
         );
     }
 
-    public function getAvailableFunctions() {
+    public function getAvailableFunctions()
+    {
         $templateFunctions = $this->getTemplateFunctions();
         $userDefineFuncs   = apply_filters(
             'jankx_twig_engine_functions',

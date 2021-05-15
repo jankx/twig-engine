@@ -11,6 +11,7 @@ class TwigEngine extends Engine
 {
     const ENGINE_NAME = 'twig';
 
+    protected $id;
     protected $twig;
     protected $directories = array();
 
@@ -20,7 +21,6 @@ class TwigEngine extends Engine
     {
         parent::__construct($id, $template_directory, $template_location, $args);
 
-        $cacheDir   = sprintf('%s/caches/twig', constant('WP_CONTENT_DIR'));
         $loader     = new FilesystemLoader(array_reverse($this->directories));
         $this->twig = new Environment($loader, array('cache' => $this->getTemplateCaches()));
     }
@@ -30,9 +30,10 @@ class TwigEngine extends Engine
         return defined('JANKX_TWIG_ENGINE_DEBUG') && JANKX_TWIG_ENGINE_DEBUG;
     }
 
-    public function setupEnvironment() {
+    public function setupEnvironment()
+    {
         $functions = new TemplateFunctions();
-        foreach($functions->getAvailableFunctions() as $functionName => $function) {
+        foreach ($functions->getAvailableFunctions() as $functionName => $function) {
             if (gettype($functionName) === 'integer') {
                 $functionName = $function;
             }
@@ -47,13 +48,13 @@ class TwigEngine extends Engine
             return false;
         }
 
+        $cacheDir   = sprintf('%s/caches/twig', constant('WP_CONTENT_DIR'));
         return apply_filters(
             'jankx_twig_engine_cache_directory',
             $cacheDir,
-            $id,
-            $template_directory,
-            $template_location,
-            $args
+            $this->id,
+            $this->directories,
+            $this->args
         );
     }
 
