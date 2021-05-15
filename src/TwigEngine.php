@@ -25,6 +25,11 @@ class TwigEngine extends Engine
         $this->twig = new Environment($loader, array('cache' => $this->getTemplateCaches()));
     }
 
+    public function getName()
+    {
+        return static::ENGINE_NAME;
+    }
+
     public static function isDebug()
     {
         return defined('JANKX_TWIG_ENGINE_DEBUG') && JANKX_TWIG_ENGINE_DEBUG;
