@@ -132,4 +132,9 @@ class TwigEngine extends Engine
             }
         }
     }
+
+    public function isRenderDirectly()
+    {
+        return false;
+    }
 }
