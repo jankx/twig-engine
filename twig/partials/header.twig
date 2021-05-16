@@ -10,5 +10,5 @@
         {{ wp_body_open() }}
 
         {{ do_action('jankx_template_before_header')}}
-            {{ jankx_component('header') }}
+            {% include 'component/header.twig' %}
         {{ do_action('jankx_template_after_header') }}
