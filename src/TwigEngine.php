@@ -1,11 +1,12 @@
 <?php
 namespace Jankx\Twig;
 
-use Jankx\Template\Engine\Engine;
-use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
-use Twig\TwigFunction;
 use Twig\Error\LoaderError;
+use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
+use Jankx\Template\Engine\Engine;
+use Jankx\Template\Engine\Data;
 
 class TwigEngine extends Engine
 {
@@ -93,6 +94,9 @@ class TwigEngine extends Engine
 
     public function render($templates, $data = [], $echo = true)
     {
+        // Merge local data with global data is shared
+        $data = array_merge(Data::all(), $data);
+
         foreach ((array)$templates as $template) {
             try {
                 $template = $this->twig->load(sprintf('%s.%s', $template, $this->extension));
