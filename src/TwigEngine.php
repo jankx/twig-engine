@@ -90,6 +90,25 @@ class TwigEngine extends Engine
 
     public function searchTemplate($templates)
     {
+        $loader = $this->twig->getLoader();
+        $paths = $loader->getPaths();
+        foreach ($paths as $path) {
+            if (is_array($templates)) {
+                foreach ($templates as $template) {
+                    $full_filename = sprintf('%s/%s.%s', $path, $template, $this->extension);
+                    if (file_exists($full_filename)) {
+                        return $full_filename;
+                    }
+                }
+            } else {
+                $full_filename = sprintf('%s/%s.%s', $path, $templates, $this->extension);
+                if (file_exists($full_filename)) {
+                    return $full_filename;
+                }
+            }
+
+            return false;
+        }
     }
 
     public function render($templates, $data = [], $echo = true)
