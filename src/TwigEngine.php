@@ -50,7 +50,7 @@ class TwigEngine extends Engine
             return false;
         }
 
-        $cacheDir   = sprintf('%s/caches/twig', constant('WP_CONTENT_DIR'));
+        $cacheDir   = sprintf('%s/twig', rtrim(JANKX_CACHE_DIR, '/'));
         return apply_filters(
             'jankx_twig_engine_cache_directory',
             $cacheDir,

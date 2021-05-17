@@ -34,9 +34,9 @@ class TemplateFunctions
         $userDefineFuncs   = apply_filters(
             'jankx_twig_engine_functions',
             array(
+                'component' => 'jankx_component',
                 'do_action',
                 'jankx_template_has_footer',
-                'jankx_component'
             )
         );
 
