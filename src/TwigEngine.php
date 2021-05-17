@@ -18,14 +18,6 @@ class TwigEngine extends Engine
 
     protected $extension = 'twig';
 
-    public function __construct($id, $template_directory, $template_location, $args)
-    {
-        parent::__construct($id, $template_directory, $template_location, $args);
-
-        $loader     = new FilesystemLoader(array_reverse($this->directories));
-        $this->twig = new Environment($loader, array('cache' => $this->getTemplateCaches()));
-    }
-
     public function getName()
     {
         return static::ENGINE_NAME;
@@ -38,6 +30,10 @@ class TwigEngine extends Engine
 
     public function setupEnvironment()
     {
+        $this->twig = new Environment(
+            new FilesystemLoader(array_reverse($this->directories)),
+            array('cache' => $this->getTemplateCaches())
+        );
         $functions = new TemplateFunctions();
         foreach ($functions->getAvailableFunctions() as $functionName => $function) {
             if (gettype($functionName) === 'integer') {
@@ -66,7 +62,7 @@ class TwigEngine extends Engine
 
     public function setDefaultTemplateDir($dir)
     {
-        if (preg_match('/jankx\/template\/default$/', $dir)) {
+        if (preg_match('/jankx\/core\/templates$/', $dir)) {
             array_push($this->directories, sprintf('%s/twig', dirname(__DIR__)));
         } else {
             array_push($this->directories, $dir);
