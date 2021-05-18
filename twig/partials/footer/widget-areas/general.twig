@@ -1,7 +1,0 @@
-<div class="jankx-footer-widget widget-area-{{ index }}">
-    {% if is_active_sidebar(['footer_', index] | join) %}
-        {{ dynamic_sidebar(['footer_', index] | join) | raw }}
-    {% else %}
-        {{ widgets_not_added_message | raw }}
-    {% endif %}
-</div>
