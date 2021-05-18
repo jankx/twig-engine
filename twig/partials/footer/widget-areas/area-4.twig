@@ -1,6 +1,6 @@
 <div class="jankx-footer-widget widget-area-4">
     {% if is_active_sidebar('footer_4') %}
-        {{ dynamic_sidebar('footer_4') }}
+        {{ dynamic_sidebar('footer_4') | raw }}
     {% else %}
         {{ widgets_not_added_message | raw }}
     {% endif %}

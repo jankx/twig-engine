@@ -1,12 +1,13 @@
 <?php
 namespace Jankx\Twig;
 
+use Jankx\TemplateEngine\Data;
+use Jankx\TemplateEngine\Engine;
+
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
-use Jankx\TemplateEngine\Engine;
-use Jankx\TemplateEngine\Data;
 
 class TwigEngine extends Engine
 {

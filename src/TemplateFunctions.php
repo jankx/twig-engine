@@ -21,7 +21,13 @@ class TemplateFunctions
             'wp_body_open',
             'body_class',
             'is_active_sidebar',
-            'dynamic_sidebar',
+            'dynamic_sidebar' => function($index) {
+                ob_start();
+
+                dynamic_sidebar($index);
+
+                return ob_get_clean();
+            },
             'jankx_template',
             'jankx_open_container',
             'jankx_close_container',
@@ -43,8 +49,6 @@ class TemplateFunctions
             )
         );
 
-        $funcs = array_merge($this->built_in_funcs, $templateFunctions, $userDefineFuncs);
-
-        return array_unique($funcs);
+        return array_merge($this->built_in_funcs, $templateFunctions, $userDefineFuncs);
     }
 }
