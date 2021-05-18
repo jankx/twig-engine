@@ -4,14 +4,13 @@
         <div class="jankx-copyright">
             {{ jankx_open_container }}
                 <div class="text">
-                    {{ copyright | raw }}.
+                    {{ copyright | raw }}
                     {% if enable_credit is same as true %}
                         {{ credit_message | raw }}
                     {% endif %}
                 </div>
             {{ jankx_close_container }}
         </div>
-
 
     {{ do_action('jankx_template_after_footer_content') }}
 </footer>
