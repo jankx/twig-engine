@@ -137,7 +137,8 @@ class TwigEngine extends Engine
         return false;
     }
 
-    public function getEngine() {
+    public function getEngine()
+    {
         return $this->twig;
     }
 }

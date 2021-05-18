@@ -1,5 +1,5 @@
     {% if jankx_template_has_footer() %}
-        {{ jankx_template('footer-content') }}
+        {% include 'partials/footer-content.twig' with component('footer') %}
     {% endif %}
 
     {{ wp_footer() }}
