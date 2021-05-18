@@ -24,7 +24,9 @@ class TemplateFunctions
             'dynamic_sidebar',
             'jankx_template',
             'jankx_open_container',
-            'jankx_close_container'
+            'jankx_close_container',
+            'has_nav_menu',
+            'wp_nav_menu'
         );
     }
 

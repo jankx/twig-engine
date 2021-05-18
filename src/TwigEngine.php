@@ -41,6 +41,9 @@ class TwigEngine extends Engine
             }
             $this->twig->addFunction(new TwigFunction($functionName, $function));
         }
+        if (static::isDebug()) {
+            $this->twig->enableDebug();
+        }
         do_action('jankx_setup_twig_environment', $this->twig, $this);
     }
 
