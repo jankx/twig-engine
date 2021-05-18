@@ -135,7 +135,7 @@ class TwigEngine extends Engine
         error_log($error_msg);
     }
 
-    public function isRenderDirectly()
+    public function isDirectRender()
     {
         return false;
     }
