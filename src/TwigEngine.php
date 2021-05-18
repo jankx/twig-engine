@@ -114,6 +114,7 @@ class TwigEngine extends Engine
     {
         // Merge local data with global data is shared
         $data = array_merge(Data::all(), $data);
+        $error_msg = '';
 
         foreach ((array)$templates as $template) {
             try {
@@ -123,13 +124,14 @@ class TwigEngine extends Engine
                 }
 
                 echo $template->render($data);
-                break;
+                return;
             } catch (\Twig\Error\LoaderError $e) {
                 if (static::isDebug()) {
-                    error_log($e->getMessage());
+                    $error_msg = $e->getMessage();
                 }
             }
         }
+        error_log($error_msg);
     }
 
     public function isRenderDirectly()
