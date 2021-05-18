@@ -33,7 +33,10 @@ class TemplateFunctions
             'jankx_close_container',
             'has_nav_menu',
             'wp_nav_menu',
-            'site_url'
+            'site_url',
+            'post_class',
+            'the_title',
+            'the_content'
         );
     }
 
