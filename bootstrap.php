@@ -17,7 +17,7 @@ class Jankx_Twig_Engine_Bootstrap
         return $engines;
     }
 
-    public function changeEngine($currentEngine, $jankxFramework)
+    public function changeEngine()
     {
         return TwigEngine::ENGINE_NAME;
     }
