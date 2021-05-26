@@ -45,6 +45,8 @@ class TwigEngine extends Engine
         if (static::isDebug()) {
             $this->twig->enableDebug();
         }
+
+        do_action("jankx_setup_{$this->id}_twig_environment", $this->twig, $this);
         do_action('jankx_setup_twig_environment', $this->twig, $this);
     }
 
@@ -111,20 +113,21 @@ class TwigEngine extends Engine
         }
     }
 
-    public function render($templates, $data = [], $echo = true)
+    public function render($templates, $context = [], $echo = true)
     {
         // Merge local data with global data is shared
-        $data = array_merge(Data::all(), $data);
+        $context = array_merge(Data::all(), $context);
+        $context = apply_filters('jankx_twig_context', $context, $templates);
         $error_msg = '';
 
         foreach ((array)$templates as $template) {
             try {
                 $template = $this->twig->load(sprintf('%s.%s', $template, $this->extension));
                 if (!$echo) {
-                    return $template->render($data);
+                    return $template->render($context);
                 }
 
-                echo $template->render($data);
+                echo $template->render($context);
                 return;
             } catch (\Twig\Error\LoaderError $e) {
                 if (static::isDebug()) {

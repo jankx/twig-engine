@@ -14,5 +14,15 @@ class Compatible
     public function compatible($twig, $engine)
     {
         $twig->addGlobal('site', new Site());
+
+        add_filter(
+            'jankx_twig_context',
+            array($this, 'compatibleTimberContext')
+        );
+    }
+
+    public function compatibleTimberContext($context)
+    {
+        return apply_filters('timber/context', $context);
     }
 }

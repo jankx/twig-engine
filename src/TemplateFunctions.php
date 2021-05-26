@@ -17,6 +17,9 @@ class TemplateFunctions
     {
         return array(
             'body_class',
+            'wp_title',
+            'wp_head',
+            'wp_footer'
         );
     }
 
