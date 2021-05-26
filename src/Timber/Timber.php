@@ -14,4 +14,9 @@ class Timber
     public static function get_sidebar($sidebar_name, $sidebar_context = array())
     {
     }
+
+    // dynamic_sidebar
+    public static function get_widgets()
+    {
+    }
 }
