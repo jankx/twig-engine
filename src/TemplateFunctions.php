@@ -13,31 +13,7 @@ class TemplateFunctions
 
     protected function getTemplateFunctions()
     {
-        return array(
-            'bloginfo' => 'get_bloginfo',
-            'wp_title',
-            'wp_head',
-            'wp_footer',
-            'wp_body_open',
-            'body_class',
-            'is_active_sidebar',
-            'dynamic_sidebar' => function($index) {
-                ob_start();
-
-                dynamic_sidebar($index);
-
-                return ob_get_clean();
-            },
-            'jankx_template',
-            'jankx_open_container',
-            'jankx_close_container',
-            'has_nav_menu',
-            'wp_nav_menu',
-            'site_url',
-            'post_class',
-            'the_title',
-            'the_content'
-        );
+        return array();
     }
 
     public function getAvailableFunctions()
