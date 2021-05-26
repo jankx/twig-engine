@@ -9,11 +9,15 @@ namespace Jankx\Twig;
 class TemplateFunctions
 {
     protected $built_in_funcs = array(
+        'action' => 'do_action',
+        'filters' => 'apply_filters',
     );
 
     protected function getTemplateFunctions()
     {
-        return array();
+        return array(
+            'body_class',
+        );
     }
 
     public function getAvailableFunctions()
