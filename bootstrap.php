@@ -1,5 +1,6 @@
 <?php
 use Jankx\Twig\TwigEngine;
+use Jankx\Twig\Timber\Compatible;
 
 class Jankx_Twig_Engine_Bootstrap
 {
@@ -7,6 +8,8 @@ class Jankx_Twig_Engine_Bootstrap
     {
         add_filter('jankx_template_engines', array($this, 'registerTwigEngine'));
         add_filter('jankx_theme_template_engine', array($this, 'changeEngine'), 10, 2);
+
+        add_action('after_setup_theme', array($this, 'makeCompatibleWithTimber'));
     }
 
     public function registerTwigEngine($engines)
@@ -20,6 +23,17 @@ class Jankx_Twig_Engine_Bootstrap
     public function changeEngine()
     {
         return TwigEngine::ENGINE_NAME;
+    }
+
+    public function makeCompatibleWithTimber() {
+        $timberCompatible = new Compatible();
+
+        add_action(
+            'jankx_setup_twig_environment',
+            array($timberCompatible, 'compatible'),
+            10,
+            2
+        );
     }
 }
 
