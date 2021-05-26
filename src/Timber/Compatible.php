@@ -1,6 +1,8 @@
 <?php
 namespace Jankx\Twig\Timber;
 
+use Jankx\Twig\Timber\Lib\Site;
+
 /**
  * class Compatible
  *
@@ -11,5 +13,6 @@ class Compatible
 {
     public function compatible($twig, $engine)
     {
+        $twig->addGlobal('site', new Site());
     }
 }
