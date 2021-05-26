@@ -2,6 +2,8 @@
 namespace Jankx\Twig\Timber;
 
 use Jankx\Twig\Timber\Lib\Site;
+use Jankx\Twig\Timber\Timber as JankxTimber;
+use Timber\Timber;
 
 /**
  * class Compatible
@@ -19,6 +21,8 @@ class Compatible
             'jankx_twig_context',
             array($this, 'compatibleTimberContext')
         );
+
+        class_alias(JankxTimber::class, Timber::class);
     }
 
     public function compatibleTimberContext($context)
