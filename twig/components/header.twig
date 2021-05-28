@@ -1,0 +1,13 @@
+<header id="{{ header_id }}" class="{{ header_class | join(' ')}}">
+    {% do action('jankx_component_before_header_content') %}
+
+    {{ open_container }}
+
+        {% do action('jankx_component_before_header') %}
+        {{ content | raw }}
+        {% do action('jankx_component_after_header') %}
+
+    {{ close_container }}
+
+    {% do action('jankx_component_after_header_content') %}
+</header>

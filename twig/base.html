@@ -11,28 +11,14 @@
         {{ function('wp_body_open') }}
 
         {% do action('jankx_template_before_header') %}
-
-        {{ component('header') | raw }}
-
+        {% include 'components/header.twig' with component('header') %}
         {% do action('jankx_template_after_header') %}
 
+
+
+
         {% do action('jankx_template_before_footer') %}
-
-        <footer id="jankx-site-footer" class="jankx-site-footer">
-        {{ open_container }}
-
-            {% do action('jankx_template_footer_widgets') %}
-
-            {% do action('jankx_template_before_footer_content') %}
-
-                {% do component('footer') %}
-
-            {% do action('jankx_template_after_footer_content') %}
-
-        {{ close_container }}
-
-        </footer>
-
+            {% include 'partials/footer-content.twig' %}
         {% do action('jankx_template_after_footer') %}
 
         {{ function('wp_footer') }}

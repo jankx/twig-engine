@@ -37,8 +37,13 @@ class Functions
         return call_user_func_array($function_name, $args);
     }
 
-    public function exe_component($component_name, $props)
+    public function exe_component($component_name, $props = array(), $array_data = true)
     {
+        $component = jankx_component($component_name, $props, false);
+        if ($array_data) {
+            return $component->buildComponentData();
+        }
+        return $component->render();
     }
 
     public function getAvailableFunctions()
@@ -47,7 +52,7 @@ class Functions
         $userDefineFuncs   = apply_filters(
             'jankx_twig_engine_functions',
             array(
-                'function' => array(&$this, 'exe_function'),
+                'function'  => array(&$this, 'exe_function'),
                 'component' => array(&$this, 'exe_component'),
             )
         );

@@ -1,0 +1,9 @@
+<div class="jankx-logo text {{ class }}">
+    <{{ wrap_tag }} class="logo-text-wrap">
+    {% if url %}
+        <a href="{{ url }}">{{ text }}</a>
+    {% else %}
+        {{ text }}
+    {% endif %}
+    </{{ wrap_tag }}>
+</div>
