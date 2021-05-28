@@ -6,7 +6,7 @@ namespace Jankx\Twig;
  *
  * Define all TwigFunction can call in .twig template file
  */
-class TemplateFunctions
+class Functions
 {
     protected $built_in_funcs = array(
         'action' => 'do_action',
@@ -30,10 +30,15 @@ class TemplateFunctions
     {
         $args = func_get_args();
         array_shift($args);
+
         if (is_string($function_name)) {
             $function_name = trim($function_name);
         }
-        return call_user_func_array($function_name, array($args));
+        return call_user_func_array($function_name, $args);
+    }
+
+    public function exe_component($component_name, $props)
+    {
     }
 
     public function getAvailableFunctions()
@@ -43,7 +48,7 @@ class TemplateFunctions
             'jankx_twig_engine_functions',
             array(
                 'function' => array(&$this, 'exe_function'),
-                'component' => 'jankx_component'
+                'component' => array(&$this, 'exe_component'),
             )
         );
 

@@ -8,6 +8,7 @@ use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
+use Twig\TwigFilter;
 
 class TwigEngine extends Engine
 {
@@ -35,7 +36,7 @@ class TwigEngine extends Engine
             new FilesystemLoader(array_reverse($this->directories)),
             array('cache' => $this->getTemplateCaches())
         );
-        $functions = new TemplateFunctions();
+        $functions = new Functions();
         foreach ($functions->getAvailableFunctions() as $functionName => $function) {
             if (gettype($functionName) === 'integer') {
                 $functionName = $function;
@@ -44,6 +45,14 @@ class TwigEngine extends Engine
         }
         if (static::isDebug()) {
             $this->twig->enableDebug();
+        }
+
+        $filters = new Filters();
+        foreach ($filters->getFilters() as $filterName => $filter) {
+            if (gettype($filterName) === 'integer') {
+                $filterName = $filter;
+            }
+            $this->twig->addFilter(new TwigFilter($filterName, $filter));
         }
 
         do_action("jankx_setup_{$this->id}_twig_environment", $this->twig, $this);
