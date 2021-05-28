@@ -13,8 +13,19 @@ use Timber\Timber;
  */
 class Compatible
 {
+    protected static $compatible = false;
+
+    public static function isCompatible()
+    {
+        return static::$compatible;
+    }
+
     public function compatible($twig, $engine)
     {
+        if (static::isCompatible()) {
+            return;
+        }
+
         $twig->addGlobal('site', new Site());
 
         add_filter(
@@ -23,6 +34,8 @@ class Compatible
         );
 
         class_alias(JankxTimber::class, Timber::class);
+
+        static::$compatible = true;
     }
 
     public function compatibleTimberContext($context)

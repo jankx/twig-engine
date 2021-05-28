@@ -1,7 +1,7 @@
 <?php
 namespace Jankx\Twig;
 
-use Jankx\TemplateEngine\Data;
+use Jankx\TemplateEngine\Context;
 use Jankx\TemplateEngine\Engine;
 
 use Twig\Environment;
@@ -116,7 +116,7 @@ class TwigEngine extends Engine
     public function render($templates, $context = [], $echo = true)
     {
         // Merge local data with global data is shared
-        $context = array_merge(Data::all(), $context);
+        $context = array_merge(Context::get(), $context);
         $context = apply_filters('jankx_twig_context', $context, $templates);
         $error_msg = '';
 

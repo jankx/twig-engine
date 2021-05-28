@@ -1,3 +1,42 @@
-{% include "_partials/header.html" %}
 
-{% include "_partials/footer.html" %}
+<!DOCTYPE html>
+<html class="no-js" {{ site.languages }}>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="profile" href="https://gmpg.org/xfn/11">
+        <title></title>
+        {{ function('wp_head') }}
+    </head>
+    <body {{ body_class() }}>
+        {{ function('wp_body_open') }}
+
+        {% do action('jankx_template_before_header') %}
+
+        {{ component('header') | raw }}
+
+        {% do action('jankx_template_after_header') %}
+
+
+        {% do action('jankx_template_before_footer') %}
+
+        <footer id="jankx-site-footer" class="jankx-site-footer">
+        {{ open_container }}
+
+            {% do action('jankx_template_footer_widgets') %}
+
+
+            {% do action('jankx_template_before_footer_content') %}
+
+                {{ component('footer') }}
+
+            {% do action('jankx_template_after_footer_content') %}
+
+        {{ close_container }}
+
+        </footer>
+
+        {% do action('jankx_template_after_footer') %}
+
+        {{ function('wp_footer') }}
+    </body>
+</html>

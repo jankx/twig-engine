@@ -27,7 +27,6 @@ class Jankx_Twig_Engine_Bootstrap
 
     public function makeCompatibleWithTimber() {
         $timberCompatible = new Compatible();
-
         add_action(
             'jankx_setup_twig_environment',
             array($timberCompatible, 'compatible'),
