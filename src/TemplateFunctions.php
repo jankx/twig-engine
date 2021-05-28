@@ -16,11 +16,24 @@ class TemplateFunctions
     protected function getTemplateFunctions()
     {
         return array(
-            'body_class',
+            'body_class' => function ($classes = '') {
+                $classes = get_body_class($classes);
+                return implode(' ', $classes);
+            },
             'wp_title',
             'wp_head',
             'wp_footer'
         );
+    }
+
+    public function exe_function($function_name)
+    {
+        $args = func_get_args();
+        array_shift($args);
+        if (is_string($function_name)) {
+            $function_name = trim($function_name);
+        }
+        return call_user_func_array($function_name, array($args));
     }
 
     public function getAvailableFunctions()
@@ -29,9 +42,8 @@ class TemplateFunctions
         $userDefineFuncs   = apply_filters(
             'jankx_twig_engine_functions',
             array(
-                'component' => 'jankx_component',
-                'do_action',
-                'jankx_template_has_footer',
+                'function' => array(&$this, 'exe_function'),
+                'component' => 'jankx_component'
             )
         );
 
