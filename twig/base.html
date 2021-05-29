@@ -10,10 +10,11 @@
     <body class="{{ body_class }}">
         {{ function('wp_body_open') }}
 
-        {% do action('jankx_template_before_header') %}
-        {% include 'components/header.twig' with component('header') %}
-        {% do action('jankx_template_after_header') %}
-
+        {% block site_header %}
+            {% do action('jankx_template_before_header') %}
+            {% include 'components/header.twig' with component('header') %}
+            {% do action('jankx_template_after_header') %}
+        {% endblock %}
 
 
         {% do action('jankx_template_before_footer') %}
