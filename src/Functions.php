@@ -16,10 +16,6 @@ class Functions
     protected function getTemplateFunctions()
     {
         return array(
-            'body_class' => function ($classes = '') {
-                $classes = get_body_class($classes);
-                return implode(' ', $classes);
-            },
             'wp_title',
             'wp_head',
             'wp_footer'
@@ -46,6 +42,17 @@ class Functions
         return $component->render();
     }
 
+    public function get_widgets($sidebar_index) {
+        if (is_active_sidebar($sidebar_index)) {
+            dynamic_sidebar($sidebar_index);
+        } elseif (current_user_can('edit_theme_options')) {
+            printf(
+                __('Please add the widgets to this sidebar at <a href="%s">Widget Dashboard</a>. Only you see this message because you are the moderator.', 'jankx'),
+                admin_url('widgets.php')
+            );
+        }
+    }
+
     public function getAvailableFunctions()
     {
         $templateFunctions = $this->getTemplateFunctions();
@@ -54,6 +61,7 @@ class Functions
             array(
                 'function'  => array(&$this, 'exe_function'),
                 'component' => array(&$this, 'exe_component'),
+                'get_widgets' => array(&$this, 'get_widgets'),
             )
         );
 
