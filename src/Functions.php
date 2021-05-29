@@ -42,7 +42,8 @@ class Functions
         return $component->render();
     }
 
-    public function get_widgets($sidebar_index) {
+    public function get_widgets($sidebar_index)
+    {
         if (is_active_sidebar($sidebar_index)) {
             dynamic_sidebar($sidebar_index);
         } elseif (current_user_can('edit_theme_options')) {
