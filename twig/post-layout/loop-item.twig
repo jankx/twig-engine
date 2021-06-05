@@ -1,2 +1,5 @@
 <div class="{{ 'loop-item' | post_class }}">
+    {% if show_thumbnail is same as true %}
+        {{ post.post_title }}
+    {% endif %}
 </div>

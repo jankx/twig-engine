@@ -1,7 +1,9 @@
 <?php
 namespace Jankx\Twig\Timber;
 
-use Jankx\Twig\Timber\Lib\Site;
+use Jankx\TemplateEngine\Data\Site;
+use Jankx\TemplateEngine\Data\Post;
+
 use Jankx\Twig\Timber\Timber as JankxTimber;
 use Timber\Timber;
 
@@ -27,6 +29,7 @@ class Compatible
         }
 
         $twig->addGlobal('site', new Site());
+        $twig->addGlobal('post', new Post());
 
         add_filter(
             'jankx_twig_context',
