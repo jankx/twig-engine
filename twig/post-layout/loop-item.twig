@@ -1,5 +1,9 @@
 <div class="{{ 'loop-item' | post_class }}">
-    {% if show_thumbnail is same as true %}
-        {{ post.post_title }}
+    {% if show_thumbnail %}
+        <div class="post-thumbnail">
+            <a href="{{ post.permalink }}" title="{{ post.title }}">
+                {{ post.thumbnail.hihi }}
+            </a>
+        </div>
     {% endif %}
 </div>

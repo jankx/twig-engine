@@ -46,6 +46,7 @@ class TwigEngine extends Engine
             $this->twig->addFunction(new TwigFunction($functionName, $function));
         }
         if (static::isDebug()) {
+            $this->twig->addFunction(new TwigFunction('var_dump', 'var_dump'));
             $this->twig->enableDebug();
         }
 
