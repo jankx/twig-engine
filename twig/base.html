@@ -16,6 +16,9 @@
             {% do action('jankx_template_after_header') %}
         {% endblock %}
 
+        {% block content %}
+        {% endblock %}
+
 
         {% do action('jankx_template_before_footer') %}
             {% include 'partials/footer-content.twig' %}

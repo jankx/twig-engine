@@ -3,6 +3,8 @@ namespace Jankx\Twig;
 
 use Jankx\TemplateEngine\Context;
 use Jankx\TemplateEngine\Engine;
+use Jankx\TemplateEngine\Filters;
+use Jankx\TemplateEngine\Functions;
 
 use Twig\Environment;
 use Twig\Error\LoaderError;
