@@ -2,8 +2,32 @@
     {% if show_thumbnail %}
         <div class="post-thumbnail">
             <a href="{{ post.permalink }}" title="{{ post.title }}">
-                {{ post.thumbnail.hihi }}
+                <img src="{{ post.thumbnail.src }}" alt="{{ post.title }}" />
             </a>
         </div>
     {% endif %}
+
+    <div class="post-infos">
+        {% if show_title %}
+        <h2 class="post-title">
+            <a href="{{ post.permalink }}" title="{{ post.title }}">{{ post.title }}</a>
+        </h2>
+        {% endif %}
+
+        {% if show_excerpt %}
+            <div class="post-exceprt">{{ post.exceprt }}</div>
+        {% endif %}
+
+        {% if (post_meta_features is not empty) %}
+            <ul class="post-metas">
+            {% for feature, value in post_meta_features %}
+                <li class="{{ feature }}">
+                {% do action(['jankx_post_layout_meta_before_', feature] | join) %}
+                    {{ _post_layout.get_meta_value(value, feature) }}
+                {% do action(['jankx_post_layout_meta_after_', feature] | join) %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 </div>
