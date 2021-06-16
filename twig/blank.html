@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html class="no-js" {{ site.languages }}>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="profile" href="https://gmpg.org/xfn/11">
+        <title></title>
+        {{ function('wp_head') }}
+    </head>
+    <body class="{{ body_class }}">
+        {{ function('wp_body_open') }}
+
+        {% block content %}
+        {% endblock %}
+
+        {{ function('wp_footer') }}
+    </body>
+</html>
