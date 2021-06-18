@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html class="no-js" {{ site.languages }}>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="profile" href="https://gmpg.org/xfn/11">
+        <title></title>
+        {{ function('wp_head') }}
+    </head>
+    <body class="{{ body_class }}">
+        {{ function('wp_body_open') }}
+
+        {% block site_header %}
+            {% do action('jankx_template_before_header') %}
+            {% include 'components/header.twig' with component('header') %}
+            {% do action('jankx_template_after_header') %}
+        {% endblock %}
+
+        {% block after_header %}
+        {% endblock %}

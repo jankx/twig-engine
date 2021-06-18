@@ -1,0 +1,7 @@
+        {% do action('jankx_template_before_footer') %}
+            {% include 'partials/footer-content.twig' %}
+        {% do action('jankx_template_after_footer') %}
+
+        {{ function('wp_footer') }}
+    </body>
+</html>
