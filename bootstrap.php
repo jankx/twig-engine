@@ -7,7 +7,7 @@ class Jankx_Twig_Engine_Bootstrap
     public function __construct()
     {
         add_filter('jankx_template_engines', array($this, 'registerTwigEngine'));
-        add_filter('jankx_theme_template_engine', array($this, 'changeEngine'), 10, 2);
+        add_filter('jankx/template/engine/apply', array($this, 'changeEngine'), 10, 2);
 
         add_action('after_setup_theme', array($this, 'makeCompatibleWithTimber'));
     }
