@@ -1,4 +1,6 @@
 <div class="{{ 'loop-item' | post_class }}">
+    {% do action('jankx_post_layout_before_loop_item', post) %}
+
     {% if show_thumbnail %}
         <div class="post-thumbnail">
             <a href="{{ post.permalink }}" title="{{ post.title }}">
@@ -30,4 +32,6 @@
             </ul>
         {% endif %}
     </div>
+
+    {% do action('jankx_post_layout_after_loop_item', post) %}
 </div>
