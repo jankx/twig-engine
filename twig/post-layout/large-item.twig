@@ -1,0 +1,14 @@
+<div class="{{ 'loop-item post-large-image' | post_class }}">
+    <div class="post-thumbnail">
+        <a href="{{ post.link }}" title="{{ post.title }}">
+            <img src="{{ post.thumbnail.src }}" alt="{{ post.title }}" />
+        </a>
+    </div>
+    <div class="post-infos">
+        <h2 class="post-title">
+            <a href="{{ post.link }}" title="{{ post.title }}">{{ post.title }}</a>
+        </h2>
+
+        <div class="description">{{ post.excerpt | raw }}</div>
+    </div>
+</div>
