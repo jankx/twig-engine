@@ -1,0 +1,13 @@
+{% for tab in tabs %}
+    {% if tab.isValid() %}
+    <li data-type="{{ tab.type }}" data-type-name={{ tab.type_name }} data-object-id={{ tab.object_id }}>
+        {% if tab.url %}
+            <a href="{{ tab.url }}" title={{ tab.title }}>{{ tab.title }}</a>
+        {% else %}
+        {{ tab.title }}
+        {% endif %}
+    </li>
+    {% endif %}
+{% endfor %}
+
+{{ tab_content | raw }}
