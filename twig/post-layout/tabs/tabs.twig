@@ -1,13 +1,15 @@
-{% for tab in tabs %}
-    {% if tab.isValid() %}
-    <li data-type="{{ tab.type }}" data-type-name={{ tab.type_name }} data-object-id={{ tab.object_id }}>
-        {% if tab.url %}
-            <a href="{{ tab.url }}" title={{ tab.title }}>{{ tab.title }}</a>
-        {% else %}
-        {{ tab.title }}
+<ul class="jankx-tabs post-layout-tabs">
+    {% for tab in tabs %}
+        {% if tab.isValid() %}
+        <li class="the-tab{% if first_tab.type_name == tab.type_name and first_tab.object_id == tab.object_id %} active{% endif %}" data-type="{{ tab.type }}" data-type-name={{ tab.type_name }} data-object-id={{ tab.object_id }}>
+            {% if tab.url %}
+                <a href="{{ tab.url }}" title={{ tab.title }}>{{ tab.title }}</a>
+            {% else %}
+            {{ tab.title }}
+            {% endif %}
+        </li>
         {% endif %}
-    </li>
-    {% endif %}
-{% endfor %}
+    {% endfor %}
+</ul>
 
 {{ tab_content | raw }}
