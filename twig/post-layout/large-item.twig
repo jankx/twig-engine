@@ -1,4 +1,5 @@
 <div class="{{ 'loop-item post-large-image' | post_class }}">
+    {% do action('jankx_post_layout_before_loop_item', post) %}
     <div class="post-thumbnail">
         <a href="{{ post.link }}" title="{{ post.title }}">
             <img src="{{ post.thumbnail.src }}" alt="{{ post.title }}" />
@@ -11,4 +12,5 @@
 
         <div class="description">{{ post.excerpt | raw }}</div>
     </div>
+    {% do action('jankx_post_layout_after_loop_item', post) %}
 </div>
