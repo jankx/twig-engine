@@ -1,3 +1,7 @@
 <aside id="jankx-{{ sidebar_name }}-sidebar" class="sidebar {{ sidebar_name }}">
+    {% do action('jankx/template/sidebar/primary/before') %}
+
     {{ get_widgets('primary') }}
+
+    {% do action('jankx/template/sidebar/primary/after') %}
 </aside>
