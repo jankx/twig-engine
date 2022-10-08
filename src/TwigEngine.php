@@ -17,10 +17,20 @@ class TwigEngine extends Engine
     const ENGINE_NAME = 'twig';
 
     protected $id;
+
+    /**
+     * @var \Twig\Environment
+     */
     protected $twig;
+
     protected $directories = array();
 
     protected $extension = 'twig';
+
+    /**
+     * @var \Jankx\Twig\Twig
+     */
+    protected $functions;
 
     public function getName()
     {
@@ -29,7 +39,7 @@ class TwigEngine extends Engine
 
     public static function isDebug()
     {
-        return defined('JANKX_TWIG_ENGINE_DEBUG') && JANKX_TWIG_ENGINE_DEBUG;
+        return defined('JANKX_TWIG_ENGINE_DEBUG') && constant('JANKX_TWIG_ENGINE_DEBUG') === true;
     }
 
     public function setupEnvironment()
@@ -43,7 +53,7 @@ class TwigEngine extends Engine
             if (gettype($functionName) === 'integer') {
                 $functionName = $function;
             }
-            $this->twig->addFunction(new TwigFunction($functionName, $function));
+            $this->registerFunction($functionName, $function);
         }
         if (static::isDebug()) {
             $this->twig->addFunction(new TwigFunction('var_dump', 'var_dump'));
@@ -104,8 +114,12 @@ class TwigEngine extends Engine
 
     public function searchTemplate($templates)
     {
+        /**
+         * @var Twig\Loader\LoaderInterface;
+         */
         $loader = $this->twig->getLoader();
         $paths = $loader->getPaths();
+
         foreach ($paths as $path) {
             if (is_array($templates)) {
                 foreach ($templates as $template) {
@@ -150,13 +164,34 @@ class TwigEngine extends Engine
         error_log($error_msg);
     }
 
+    /**
+     * @return boolean
+     */
     public function isDirectRender()
     {
         return false;
     }
 
+    /**
+     * @return \Twig\Environment
+     */
     public function getEngine()
     {
         return $this->twig;
+    }
+
+    /**
+     * @param string $name The function name
+     * @param callable $callback
+     *
+     * @return void
+     */
+    public function registerFunction($name, $callback, $options = [])
+    {
+        // If the callback is can not call. The function is skipped
+        if (!is_callable($callback)) {
+            return;
+        }
+        $this->twig->addFunction(new TwigFunction($name, $callback, $options));
     }
 }
