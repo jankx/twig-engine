@@ -42,6 +42,12 @@ class TwigEngine extends Engine
         return defined('JANKX_TWIG_ENGINE_DEBUG') && constant('JANKX_TWIG_ENGINE_DEBUG') === true;
     }
 
+    public static function isDisableCache()
+    {
+        return defined('JANKX_DISABLE_TWIG_CACHE')
+            && constant('JANKX_DISABLE_TWIG_CACHE') === true;
+    }
+
     public function setupEnvironment()
     {
         $this->twig = new Environment(
@@ -74,7 +80,7 @@ class TwigEngine extends Engine
 
     protected function getTemplateCaches()
     {
-        if (static::isDebug()) {
+        if (static::isDisableCache()) {
             return false;
         }
 
