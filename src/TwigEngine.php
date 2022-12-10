@@ -96,7 +96,7 @@ class TwigEngine extends Engine
 
     public function setDefaultTemplateDir($dir)
     {
-        if (preg_match('/jankx\/core\/templates$/', $dir)) {
+        if (preg_match('/jankx\/core\/templates$/', str_replace(DIRECTORY_SEPARATOR, '/', $dir))) {
             array_push($this->directories, sprintf('%s/twig', dirname(__DIR__)));
         } else {
             array_push($this->directories, $dir);
