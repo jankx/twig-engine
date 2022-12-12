@@ -1,0 +1,4 @@
+<script>
+    var {{var}}__configs = {{ function('json_encode', config) | raw}};
+    var {{var}} = new Splide('#{{id}}', {{var}}__configs).mount();
+</script>
