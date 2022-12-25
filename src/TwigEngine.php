@@ -7,8 +7,8 @@ use Jankx\TemplateEngine\Filters;
 use Jankx\TemplateEngine\Functions;
 
 use Twig\Environment;
-use Twig\Error\LoaderError;
 use Twig\Loader\FilesystemLoader;
+use Twig\Extension\DebugExtension;
 use Twig\TwigFunction;
 use Twig\TwigFilter;
 
@@ -39,7 +39,10 @@ class TwigEngine extends Engine
 
     public static function isDebug()
     {
-        return defined('JANKX_TWIG_ENGINE_DEBUG') && constant('JANKX_TWIG_ENGINE_DEBUG') === true;
+        if (defined('JANKX_TWIG_ENGINE_DEBUG')) {
+            return constant('JANKX_TWIG_ENGINE_DEBUG');
+        }
+        return defined('WP_DEBUG') && constant('WP_DEBUG');
     }
 
     public static function isDisableCache()
@@ -64,6 +67,8 @@ class TwigEngine extends Engine
         if (static::isDebug()) {
             $this->twig->addFunction(new TwigFunction('var_dump', 'var_dump'));
             $this->twig->enableDebug();
+
+            $this->twig->addExtension(new DebugExtension());
         }
 
         $filters = new Filters();
