@@ -6,9 +6,9 @@
         </a>
     </div>
     <div class="post-infos">
-        <h2 class="post-title">
+        <{{post_title_tag}} class="post-title">
             <a href="{{ post.link }}" title="{{ post.title }}">{{ post.title }}</a>
-        </h2>
+        </{{post_title_tag}}>
 
         <div class="description">{{ post.excerpt | raw }}</div>
     </div>

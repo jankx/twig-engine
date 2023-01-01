@@ -13,9 +13,9 @@
 
     <div class="post-infos">
         {% if show_title %}
-        <h2 class="post-title">
+        <{{post_title_tag}} class="post-title">
             <a href="{{ post.permalink }}" title="{{ post.title }}">{{ post.title }}</a>
-        </h2>
+        </{{post_title_tag}}>
         {% endif %}
 
         {% if show_excerpt %}
