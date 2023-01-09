@@ -5,7 +5,7 @@
         <div class="post-thumbnail">
             {% do action('jankx_post_layout_before_loop_post_thumbnail', post) %}
             <a href="{{ post.permalink }}" title="{{ post.title }}">
-                <img src="{{ post.thumbnail.src }}" alt="{{ post.title }}" />
+                <img src="{{ post.thumbnail.src(thumbnail_size) }}" alt="{{ post.title }}" />
             </a>
             {% do action('jankx_post_layout_after_loop_post_thumbnail', post) %}
         </div>
